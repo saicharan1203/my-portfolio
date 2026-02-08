@@ -5,7 +5,33 @@ import SkillBadge from "@/components/SkillBadge";
 import ContactForm from "@/components/ContactForm";
 import Footer from "@/components/Footer";
 import { useProjects, useSkills } from "@/hooks/use-portfolio";
-import { ArrowDown, Code2, Database, Layout, Sparkles } from "lucide-react";
+import { ArrowDown, Code2, Database, Layout, Sparkles, FileSpreadsheet } from "lucide-react";
+import {
+  SiPython, SiNodedotjs, SiReact, SiMongodb, SiPostgresql,
+  SiOpencv, SiTensorflow, SiPytorch, SiFlask, SiHtml5,
+  SiTypescript, SiJavascript
+} from "react-icons/si";
+import { FaJava } from "react-icons/fa";
+
+const skillIcons: Record<string, React.ElementType> = {
+  "Python": SiPython,
+  "Node.js": SiNodedotjs,
+  "React": SiReact,
+  "MongoDB": SiMongodb,
+  "PostgreSQL": SiPostgresql,
+  "SQL": SiPostgresql,
+  "OpenCV": SiOpencv,
+  "TensorFlow": SiTensorflow,
+  "PyTorch": SiPytorch,
+  "Flask": SiFlask,
+  "HTML/CSS": SiHtml5,
+  "Java": FaJava,
+  "Power BI": FileSpreadsheet, // Using Lucide icon as fallback
+  "Excel": FileSpreadsheet,    // Using Lucide icon as fallback
+  "JavaScript": SiJavascript,
+  "TypeScript": SiTypescript,
+  "Machine Learning": Sparkles, // Fallback to Lucide icon for generic concept
+};
 
 export default function Home() {
   const { data: projects = [], isLoading: loadingProjects } = useProjects();
@@ -131,7 +157,12 @@ export default function Home() {
 
                   <div className="grid grid-cols-1 gap-4">
                     {categorySkills.map((skill, index) => (
-                      <SkillBadge key={skill.id} skill={skill} index={index} />
+                      <SkillBadge
+                        key={skill.id}
+                        skill={skill}
+                        index={index}
+                        icon={skillIcons[skill.name]}
+                      />
                     ))}
                   </div>
                 </motion.div>

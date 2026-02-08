@@ -4,9 +4,10 @@ import type { Skill } from "@shared/schema";
 interface SkillBadgeProps {
   skill: Skill;
   index: number;
+  icon?: React.ElementType;
 }
 
-export default function SkillBadge({ skill, index }: SkillBadgeProps) {
+export default function SkillBadge({ skill, index, icon: Icon }: SkillBadgeProps) {
   return (
     <motion.div
       initial={{ opacity: 0, scale: 0.9 }}
@@ -16,9 +17,12 @@ export default function SkillBadge({ skill, index }: SkillBadgeProps) {
       className="relative group p-4 rounded-xl bg-secondary/30 border border-white/5 hover:bg-secondary/50 hover:border-primary/20 transition-all duration-300"
     >
       <div className="flex items-center justify-between mb-2">
-        <span className="font-medium text-white group-hover:text-primary transition-colors">
-          {skill.name}
-        </span>
+        <div className="flex items-center gap-2">
+          {Icon && <Icon className="w-5 h-5 text-primary" />}
+          <span className="font-medium text-white group-hover:text-primary transition-colors">
+            {skill.name}
+          </span>
+        </div>
         <span className="text-xs font-mono text-muted-foreground">
           {skill.proficiency}%
         </span>
